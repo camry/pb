@@ -89,6 +89,102 @@ func (x *CTables) GetCreatedAt() string {
 	return ""
 }
 
+type CTableIndex struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TableName     string                 `protobuf:"bytes,1,opt,name=table_name,json=tableName,proto3" json:"table_name,omitempty" redis:"table_name,omitempty" bson:"table_name,omitempty" gorm:"column:table_name"` // 表名
+	TableCrc      uint32                 `protobuf:"varint,2,opt,name=table_crc,json=tableCrc,proto3" json:"table_crc,omitempty" redis:"table_crc,omitempty" bson:"table_crc,omitempty" gorm:"column:table_crc"`      // 表CRC
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CTableIndex) Reset() {
+	*x = CTableIndex{}
+	mi := &file_cpb_c_tables_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CTableIndex) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CTableIndex) ProtoMessage() {}
+
+func (x *CTableIndex) ProtoReflect() protoreflect.Message {
+	mi := &file_cpb_c_tables_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CTableIndex.ProtoReflect.Descriptor instead.
+func (*CTableIndex) Descriptor() ([]byte, []int) {
+	return file_cpb_c_tables_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CTableIndex) GetTableName() string {
+	if x != nil {
+		return x.TableName
+	}
+	return ""
+}
+
+func (x *CTableIndex) GetTableCrc() uint32 {
+	if x != nil {
+		return x.TableCrc
+	}
+	return 0
+}
+
+type CTableIndexList struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	TableIndexList []*CTableIndex         `protobuf:"bytes,1,rep,name=table_index_list,json=tableIndexList,proto3" json:"table_index_list,omitempty" redis:"table_index_list,omitempty" bson:"table_index_list,omitempty" gorm:"column:table_index_list"` // 表索引列表
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CTableIndexList) Reset() {
+	*x = CTableIndexList{}
+	mi := &file_cpb_c_tables_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CTableIndexList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CTableIndexList) ProtoMessage() {}
+
+func (x *CTableIndexList) ProtoReflect() protoreflect.Message {
+	mi := &file_cpb_c_tables_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CTableIndexList.ProtoReflect.Descriptor instead.
+func (*CTableIndexList) Descriptor() ([]byte, []int) {
+	return file_cpb_c_tables_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CTableIndexList) GetTableIndexList() []*CTableIndex {
+	if x != nil {
+		return x.TableIndexList
+	}
+	return nil
+}
+
 var File_cpb_c_tables_proto protoreflect.FileDescriptor
 
 const file_cpb_c_tables_proto_rawDesc = "" +
@@ -101,7 +197,13 @@ const file_cpb_c_tables_proto_rawDesc = "" +
 	"\n" +
 	"table_data\x18\x03 \x01(\fR\ttableData\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\tR\tcreatedAtB\x19Z\x17github.com/camry/pb/cpbb\x06proto3"
+	"created_at\x18\x04 \x01(\tR\tcreatedAt\"I\n" +
+	"\vCTableIndex\x12\x1d\n" +
+	"\n" +
+	"table_name\x18\x01 \x01(\tR\ttableName\x12\x1b\n" +
+	"\ttable_crc\x18\x02 \x01(\rR\btableCrc\"M\n" +
+	"\x0fCTableIndexList\x12:\n" +
+	"\x10table_index_list\x18\x01 \x03(\v2\x10.cpb.CTableIndexR\x0etableIndexListB\x19Z\x17github.com/camry/pb/cpbb\x06proto3"
 
 var (
 	file_cpb_c_tables_proto_rawDescOnce sync.Once
@@ -115,16 +217,19 @@ func file_cpb_c_tables_proto_rawDescGZIP() []byte {
 	return file_cpb_c_tables_proto_rawDescData
 }
 
-var file_cpb_c_tables_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_cpb_c_tables_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_cpb_c_tables_proto_goTypes = []any{
-	(*CTables)(nil), // 0: cpb.CTables
+	(*CTables)(nil),         // 0: cpb.CTables
+	(*CTableIndex)(nil),     // 1: cpb.CTableIndex
+	(*CTableIndexList)(nil), // 2: cpb.CTableIndexList
 }
 var file_cpb_c_tables_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: cpb.CTableIndexList.table_index_list:type_name -> cpb.CTableIndex
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_cpb_c_tables_proto_init() }
@@ -138,7 +243,7 @@ func file_cpb_c_tables_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cpb_c_tables_proto_rawDesc), len(file_cpb_c_tables_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
