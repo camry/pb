@@ -89,7 +89,7 @@ func (x *CTables) GetCreatedAt() string {
 	return ""
 }
 
-type CTableIndex struct {
+type CTableHash struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TableName     string                 `protobuf:"bytes,1,opt,name=table_name,json=tableName,proto3" json:"table_name,omitempty" redis:"table_name,omitempty" bson:"table_name,omitempty" gorm:"column:table_name"` // 表名
 	TableCrc      uint32                 `protobuf:"varint,2,opt,name=table_crc,json=tableCrc,proto3" json:"table_crc,omitempty" redis:"table_crc,omitempty" bson:"table_crc,omitempty" gorm:"column:table_crc"`      // 表CRC
@@ -97,9 +97,60 @@ type CTableIndex struct {
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *CTableHash) Reset() {
+	*x = CTableHash{}
+	mi := &file_cpb_c_tables_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CTableHash) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CTableHash) ProtoMessage() {}
+
+func (x *CTableHash) ProtoReflect() protoreflect.Message {
+	mi := &file_cpb_c_tables_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CTableHash.ProtoReflect.Descriptor instead.
+func (*CTableHash) Descriptor() ([]byte, []int) {
+	return file_cpb_c_tables_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CTableHash) GetTableName() string {
+	if x != nil {
+		return x.TableName
+	}
+	return ""
+}
+
+func (x *CTableHash) GetTableCrc() uint32 {
+	if x != nil {
+		return x.TableCrc
+	}
+	return 0
+}
+
+type CTableIndex struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TableHashMap  map[string]*CTableHash `protobuf:"bytes,1,rep,name=table_hash_map,json=tableHashMap,proto3" json:"table_hash_map,omitempty" redis:"table_hash_map,omitempty" bson:"table_hash_map,omitempty" gorm:"column:table_hash_map" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // 表索引字典
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
 func (x *CTableIndex) Reset() {
 	*x = CTableIndex{}
-	mi := &file_cpb_c_tables_proto_msgTypes[1]
+	mi := &file_cpb_c_tables_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -111,7 +162,7 @@ func (x *CTableIndex) String() string {
 func (*CTableIndex) ProtoMessage() {}
 
 func (x *CTableIndex) ProtoReflect() protoreflect.Message {
-	mi := &file_cpb_c_tables_proto_msgTypes[1]
+	mi := &file_cpb_c_tables_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -124,63 +175,12 @@ func (x *CTableIndex) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CTableIndex.ProtoReflect.Descriptor instead.
 func (*CTableIndex) Descriptor() ([]byte, []int) {
-	return file_cpb_c_tables_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CTableIndex) GetTableName() string {
-	if x != nil {
-		return x.TableName
-	}
-	return ""
-}
-
-func (x *CTableIndex) GetTableCrc() uint32 {
-	if x != nil {
-		return x.TableCrc
-	}
-	return 0
-}
-
-type CTableIndexList struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	TableIndexMap map[string]*CTableIndex `protobuf:"bytes,1,rep,name=table_index_map,json=tableIndexMap,proto3" json:"table_index_map,omitempty" redis:"table_index_map,omitempty" bson:"table_index_map,omitempty" gorm:"column:table_index_map" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // 表索引字典
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CTableIndexList) Reset() {
-	*x = CTableIndexList{}
-	mi := &file_cpb_c_tables_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CTableIndexList) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CTableIndexList) ProtoMessage() {}
-
-func (x *CTableIndexList) ProtoReflect() protoreflect.Message {
-	mi := &file_cpb_c_tables_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CTableIndexList.ProtoReflect.Descriptor instead.
-func (*CTableIndexList) Descriptor() ([]byte, []int) {
 	return file_cpb_c_tables_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CTableIndexList) GetTableIndexMap() map[string]*CTableIndex {
+func (x *CTableIndex) GetTableHashMap() map[string]*CTableHash {
 	if x != nil {
-		return x.TableIndexMap
+		return x.TableHashMap
 	}
 	return nil
 }
@@ -197,16 +197,17 @@ const file_cpb_c_tables_proto_rawDesc = "" +
 	"\n" +
 	"table_data\x18\x03 \x01(\fR\ttableData\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\tR\tcreatedAt\"I\n" +
-	"\vCTableIndex\x12\x1d\n" +
+	"created_at\x18\x04 \x01(\tR\tcreatedAt\"H\n" +
+	"\n" +
+	"CTableHash\x12\x1d\n" +
 	"\n" +
 	"table_name\x18\x01 \x01(\tR\ttableName\x12\x1b\n" +
-	"\ttable_crc\x18\x02 \x01(\rR\btableCrc\"\xb6\x01\n" +
-	"\x0fCTableIndexList\x12O\n" +
-	"\x0ftable_index_map\x18\x01 \x03(\v2'.cpb.CTableIndexList.TableIndexMapEntryR\rtableIndexMap\x1aR\n" +
-	"\x12TableIndexMapEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12&\n" +
-	"\x05value\x18\x02 \x01(\v2\x10.cpb.CTableIndexR\x05value:\x028\x01B\x19Z\x17github.com/camry/pb/cpbb\x06proto3"
+	"\ttable_crc\x18\x02 \x01(\rR\btableCrc\"\xa9\x01\n" +
+	"\vCTableIndex\x12H\n" +
+	"\x0etable_hash_map\x18\x01 \x03(\v2\".cpb.CTableIndex.TableHashMapEntryR\ftableHashMap\x1aP\n" +
+	"\x11TableHashMapEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12%\n" +
+	"\x05value\x18\x02 \x01(\v2\x0f.cpb.CTableHashR\x05value:\x028\x01B\x19Z\x17github.com/camry/pb/cpbb\x06proto3"
 
 var (
 	file_cpb_c_tables_proto_rawDescOnce sync.Once
@@ -222,14 +223,14 @@ func file_cpb_c_tables_proto_rawDescGZIP() []byte {
 
 var file_cpb_c_tables_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_cpb_c_tables_proto_goTypes = []any{
-	(*CTables)(nil),         // 0: cpb.CTables
-	(*CTableIndex)(nil),     // 1: cpb.CTableIndex
-	(*CTableIndexList)(nil), // 2: cpb.CTableIndexList
-	nil,                     // 3: cpb.CTableIndexList.TableIndexMapEntry
+	(*CTables)(nil),     // 0: cpb.CTables
+	(*CTableHash)(nil),  // 1: cpb.CTableHash
+	(*CTableIndex)(nil), // 2: cpb.CTableIndex
+	nil,                 // 3: cpb.CTableIndex.TableHashMapEntry
 }
 var file_cpb_c_tables_proto_depIdxs = []int32{
-	3, // 0: cpb.CTableIndexList.table_index_map:type_name -> cpb.CTableIndexList.TableIndexMapEntry
-	1, // 1: cpb.CTableIndexList.TableIndexMapEntry.value:type_name -> cpb.CTableIndex
+	3, // 0: cpb.CTableIndex.table_hash_map:type_name -> cpb.CTableIndex.TableHashMapEntry
+	1, // 1: cpb.CTableIndex.TableHashMapEntry.value:type_name -> cpb.CTableHash
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
