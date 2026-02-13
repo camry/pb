@@ -142,10 +142,10 @@ func (x *CTableIndex) GetTableCrc() uint32 {
 }
 
 type CTableIndexList struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	TableIndexList []*CTableIndex         `protobuf:"bytes,1,rep,name=table_index_list,json=tableIndexList,proto3" json:"table_index_list,omitempty" redis:"table_index_list,omitempty" bson:"table_index_list,omitempty" gorm:"column:table_index_list"` // 表索引列表
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	TableIndexMap map[string]*CTableIndex `protobuf:"bytes,1,rep,name=table_index_map,json=tableIndexMap,proto3" json:"table_index_map,omitempty" redis:"table_index_map,omitempty" bson:"table_index_map,omitempty" gorm:"column:table_index_map" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // 表索引字典
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CTableIndexList) Reset() {
@@ -178,9 +178,9 @@ func (*CTableIndexList) Descriptor() ([]byte, []int) {
 	return file_cpb_c_tables_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CTableIndexList) GetTableIndexList() []*CTableIndex {
+func (x *CTableIndexList) GetTableIndexMap() map[string]*CTableIndex {
 	if x != nil {
-		return x.TableIndexList
+		return x.TableIndexMap
 	}
 	return nil
 }
@@ -201,9 +201,12 @@ const file_cpb_c_tables_proto_rawDesc = "" +
 	"\vCTableIndex\x12\x1d\n" +
 	"\n" +
 	"table_name\x18\x01 \x01(\tR\ttableName\x12\x1b\n" +
-	"\ttable_crc\x18\x02 \x01(\rR\btableCrc\"M\n" +
-	"\x0fCTableIndexList\x12:\n" +
-	"\x10table_index_list\x18\x01 \x03(\v2\x10.cpb.CTableIndexR\x0etableIndexListB\x19Z\x17github.com/camry/pb/cpbb\x06proto3"
+	"\ttable_crc\x18\x02 \x01(\rR\btableCrc\"\xb6\x01\n" +
+	"\x0fCTableIndexList\x12O\n" +
+	"\x0ftable_index_map\x18\x01 \x03(\v2'.cpb.CTableIndexList.TableIndexMapEntryR\rtableIndexMap\x1aR\n" +
+	"\x12TableIndexMapEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12&\n" +
+	"\x05value\x18\x02 \x01(\v2\x10.cpb.CTableIndexR\x05value:\x028\x01B\x19Z\x17github.com/camry/pb/cpbb\x06proto3"
 
 var (
 	file_cpb_c_tables_proto_rawDescOnce sync.Once
@@ -217,19 +220,21 @@ func file_cpb_c_tables_proto_rawDescGZIP() []byte {
 	return file_cpb_c_tables_proto_rawDescData
 }
 
-var file_cpb_c_tables_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_cpb_c_tables_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_cpb_c_tables_proto_goTypes = []any{
 	(*CTables)(nil),         // 0: cpb.CTables
 	(*CTableIndex)(nil),     // 1: cpb.CTableIndex
 	(*CTableIndexList)(nil), // 2: cpb.CTableIndexList
+	nil,                     // 3: cpb.CTableIndexList.TableIndexMapEntry
 }
 var file_cpb_c_tables_proto_depIdxs = []int32{
-	1, // 0: cpb.CTableIndexList.table_index_list:type_name -> cpb.CTableIndex
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 0: cpb.CTableIndexList.table_index_map:type_name -> cpb.CTableIndexList.TableIndexMapEntry
+	1, // 1: cpb.CTableIndexList.TableIndexMapEntry.value:type_name -> cpb.CTableIndex
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_cpb_c_tables_proto_init() }
@@ -243,7 +248,7 @@ func file_cpb_c_tables_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cpb_c_tables_proto_rawDesc), len(file_cpb_c_tables_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
