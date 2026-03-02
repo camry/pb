@@ -1,4 +1,4 @@
-module github.com/camry/pb
+module gitea.meigushi.go/meigushi/pb
 
 go 1.25.6
 
