@@ -23,10 +23,11 @@ const (
 
 type Config struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MysqlDns      string                 `protobuf:"bytes,1,opt,name=mysql_dns,json=mysqlDns,proto3" json:"mysql_dns,omitempty" redis:"mysql_dns,omitempty" bson:"mysql_dns,omitempty" gorm:"column:mysql_dns"` // MySQL DNS
-	MongoUri      string                 `protobuf:"bytes,2,opt,name=mongo_uri,json=mongoUri,proto3" json:"mongo_uri,omitempty" redis:"mongo_uri,omitempty" bson:"mongo_uri,omitempty" gorm:"column:mongo_uri"` // Mongo URI
-	Cache         *RedisConfig           `protobuf:"bytes,3,opt,name=cache,proto3" json:"cache,omitempty" redis:"cache,omitempty" bson:"cache,omitempty" gorm:"column:cache"`                                   // Cache Redis Config
-	TmpCache      *RedisConfig           `protobuf:"bytes,4,opt,name=tmp_cache,json=tmpCache,proto3" json:"tmp_cache,omitempty" redis:"tmp_cache,omitempty" bson:"tmp_cache,omitempty" gorm:"column:tmp_cache"` // Tmp Cache Redis Config
+	Env           string                 `protobuf:"bytes,1,opt,name=env,proto3" json:"env,omitempty" redis:"env,omitempty" bson:"env,omitempty" gorm:"column:env"`                                             // ENV
+	MysqlDns      string                 `protobuf:"bytes,2,opt,name=mysql_dns,json=mysqlDns,proto3" json:"mysql_dns,omitempty" redis:"mysql_dns,omitempty" bson:"mysql_dns,omitempty" gorm:"column:mysql_dns"` // MySQL DNS
+	MongoUri      string                 `protobuf:"bytes,3,opt,name=mongo_uri,json=mongoUri,proto3" json:"mongo_uri,omitempty" redis:"mongo_uri,omitempty" bson:"mongo_uri,omitempty" gorm:"column:mongo_uri"` // Mongo URI
+	Cache         *RedisConfig           `protobuf:"bytes,4,opt,name=cache,proto3" json:"cache,omitempty" redis:"cache,omitempty" bson:"cache,omitempty" gorm:"column:cache"`                                   // Cache Redis Config
+	TmpCache      *RedisConfig           `protobuf:"bytes,5,opt,name=tmp_cache,json=tmpCache,proto3" json:"tmp_cache,omitempty" redis:"tmp_cache,omitempty" bson:"tmp_cache,omitempty" gorm:"column:tmp_cache"` // Tmp Cache Redis Config
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -59,6 +60,13 @@ func (x *Config) ProtoReflect() protoreflect.Message {
 // Deprecated: Use Config.ProtoReflect.Descriptor instead.
 func (*Config) Descriptor() ([]byte, []int) {
 	return file_cpb_config_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Config) GetEnv() string {
+	if x != nil {
+		return x.Env
+	}
+	return ""
 }
 
 func (x *Config) GetMysqlDns() string {
@@ -161,12 +169,13 @@ var File_cpb_config_proto protoreflect.FileDescriptor
 
 const file_cpb_config_proto_rawDesc = "" +
 	"\n" +
-	"\x10cpb/config.proto\x12\x03cpb\"\x99\x01\n" +
-	"\x06Config\x12\x1b\n" +
-	"\tmysql_dns\x18\x01 \x01(\tR\bmysqlDns\x12\x1b\n" +
-	"\tmongo_uri\x18\x02 \x01(\tR\bmongoUri\x12&\n" +
-	"\x05cache\x18\x03 \x01(\v2\x10.cpb.RedisConfigR\x05cache\x12-\n" +
-	"\ttmp_cache\x18\x04 \x01(\v2\x10.cpb.RedisConfigR\btmpCache\"i\n" +
+	"\x10cpb/config.proto\x12\x03cpb\"\xab\x01\n" +
+	"\x06Config\x12\x10\n" +
+	"\x03env\x18\x01 \x01(\tR\x03env\x12\x1b\n" +
+	"\tmysql_dns\x18\x02 \x01(\tR\bmysqlDns\x12\x1b\n" +
+	"\tmongo_uri\x18\x03 \x01(\tR\bmongoUri\x12&\n" +
+	"\x05cache\x18\x04 \x01(\v2\x10.cpb.RedisConfigR\x05cache\x12-\n" +
+	"\ttmp_cache\x18\x05 \x01(\v2\x10.cpb.RedisConfigR\btmpCache\"i\n" +
 	"\vRedisConfig\x12\x12\n" +
 	"\x04addr\x18\x01 \x01(\tR\x04addr\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
