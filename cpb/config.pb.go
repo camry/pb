@@ -216,7 +216,7 @@ const file_cpb_config_proto_rawDesc = "" +
 	"\x04addr\x18\x01 \x01(\tR\x04addr\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpassword\x12\x0e\n" +
-	"\x02db\x18\x04 \x01(\x05R\x02dbB#Z!gitea.meigushi.go/meigushi/pb/cpbb\x06proto3"
+	"\x02db\x18\x04 \x01(\x05R\x02dbB#Z!github.com/camry/pb/cpbb\x06proto3"
 
 var (
 	file_cpb_config_proto_rawDescOnce sync.Once

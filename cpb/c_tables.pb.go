@@ -207,7 +207,7 @@ const file_cpb_c_tables_proto_rawDesc = "" +
 	"\x0etable_hash_map\x18\x01 \x03(\v2\".cpb.CTableIndex.TableHashMapEntryR\ftableHashMap\x1aP\n" +
 	"\x11TableHashMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12%\n" +
-	"\x05value\x18\x02 \x01(\v2\x0f.cpb.CTableHashR\x05value:\x028\x01B#Z!gitea.meigushi.go/meigushi/pb/cpbb\x06proto3"
+	"\x05value\x18\x02 \x01(\v2\x0f.cpb.CTableHashR\x05value:\x028\x01B#Z!github.com/camry/pb/cpbb\x06proto3"
 
 var (
 	file_cpb_c_tables_proto_rawDescOnce sync.Once

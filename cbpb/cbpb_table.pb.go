@@ -75,7 +75,7 @@ const file_cbpb_cbpb_table_proto_rawDesc = "" +
 	"\x06tables\x18\x01 \x03(\v2\x1a.cbpb.TableMap.TablesEntryR\x06tables\x1aO\n" +
 	"\vTablesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12*\n" +
-	"\x05value\x18\x02 \x01(\v2\x14.google.protobuf.AnyR\x05value:\x028\x01B$Z\"gitea.meigushi.go/meigushi/pb/cbpbb\x06proto3"
+	"\x05value\x18\x02 \x01(\v2\x14.google.protobuf.AnyR\x05value:\x028\x01B$Z\"github.com/camry/pb/cbpbb\x06proto3"
 
 var (
 	file_cbpb_cbpb_table_proto_rawDescOnce sync.Once
